@@ -38,7 +38,7 @@ export class ClientProfileService {
   }
 
   deleteClient(clientId: string): Observable<string> {
-    return this.http.delete<string>(this.apiUrl)
+    return this.http.delete<string>(`${this.apiUrl}${clientId}`)
       .pipe(catchError(this.erroHandler));
   }
 

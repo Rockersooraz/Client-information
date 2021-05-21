@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {ClientProfileService} from '../client-profile.service';
 import {ClientDto} from '../dto/client.dto';
+import {ToastrService} from 'ngx-toastr';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-account-list',
@@ -10,21 +12,28 @@ import {ClientDto} from '../dto/client.dto';
 })
 export class ClientListComponent implements OnInit {
 
-  clients: ClientDto[];
+  public clients$: Observable<ClientDto[]>;
 
-  constructor(private clientProfileService: ClientProfileService, private router: Router) { }
-
-  ngOnInit() {
-    this.clientProfileService.getAllClients()
-    .subscribe(
-      (clients => {
-        this.clients = clients;
-      })
-    )
+  constructor(private clientProfileService: ClientProfileService,
+              private router: Router,
+              private toaster: ToastrService,
+              private changeDetection: ChangeDetectorRef) {
   }
 
-  onSelect(client: ClientDto){
+  ngOnInit() {
+   this.clients$ = this.clientProfileService.getAllClients();
+  }
+
+  onSelect(client: ClientDto) {
     this.router.navigate(['client/client-detail', client.id]);
   }
 
+  deleteClient(cl: ClientDto): void {
+    if (confirm((`Are you sure you want to delete ${cl.name} Client`))) {
+      this.clientProfileService.deleteClient(cl.id).subscribe();
+      this.toaster.success('Client deleted successfully', 'success', {timeOut: 4000});
+      this.router.navigate(['client/create-client']);
+      this.changeDetection.detectChanges();
+    }
+  }
 }
