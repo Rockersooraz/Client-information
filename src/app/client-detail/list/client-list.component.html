@@ -1,0 +1,40 @@
+<br>
+<div class="d-flex justify-content-end" style="margin-right: 40px;">
+  <a id="account" class="btn btn-info" routerLink="/client/create-client">Create Account</a>
+</div>
+<br>
+<br>
+<table class="table table-striped table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Client Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Phone-Number</th>
+    <th scope="col">Email</th>
+    <th scope="col">Address</th>
+    <th scope="col">Nationality</th>
+    <th scope="col">Date of Birth</th>
+    <th scope="col">Education Background</th>
+    <th scope="col">Preference Mode Of Contact</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cl of clients">
+    <td>{{cl.id}}</td>
+    <td>{{cl.name}}</td>
+    <td>{{cl.gender}}</td>
+    <td>{{cl.phone}}</td>
+    <td>{{cl.email}}</td>
+    <td>{{cl.address}}</td>
+    <td>{{cl.nationality}}</td>
+    <td>{{cl.dateOfBirth}}</td>
+    <td>{{cl.educationBackground}}</td>
+    <td>{{cl.preferredModeOfContact}}</td>
+    <td (click)="onSelect(cl)" class="btn btn-info" style="cursor: pointer;">Details</td>
+  </tr>
+
+  </tbody>
+</table>
+
+
