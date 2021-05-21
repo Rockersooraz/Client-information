@@ -21,7 +21,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let cl of clients$ | async">
+  <tr *ngFor="let cl of clients">
     <td>{{cl.id}}</td>
     <td>{{cl.name}}</td>
     <td>{{cl.gender}}</td>
@@ -33,7 +33,7 @@
     <td>{{cl.educationBackground}}</td>
     <td>{{cl.preferredModeOfContact}}</td>
     <td (click)="onSelect(cl)" class="btn btn-info" style="cursor: pointer;"><i class="fa fa-eye mr-4 display-blue align-margin"></i>Details</td>
-    <td (click)="deleteClient(cl)" class="btn btn-danger" style="cursor: pointer; color: #030005"><i class="fa fa-trash mr-4 display-blue align-margin"></i>Delete</td>
+    <td (click)="deleteClient(cl)" class="btn btn-danger" style="cursor: pointer; color: #030005"><i class="fa fa-trash display-blue align-margin"></i>Delete</td>
   </tr>
   </tbody>
 </table>

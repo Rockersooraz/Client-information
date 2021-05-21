@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ClientProfileService} from '../client-profile.service';
 import {ClientDto} from '../dto/client.dto';
@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 })
 export class ClientListComponent implements OnInit {
 
-  public clients$: Observable<ClientDto[]>;
+  public clients: ClientDto[];
 
   constructor(private clientProfileService: ClientProfileService,
               private router: Router,
@@ -21,7 +21,9 @@ export class ClientListComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.clients$ = this.clientProfileService.getAllClients();
+    this.clientProfileService.getAllClients().subscribe((client) => {
+      this.clients = client;
+    });
   }
 
   onSelect(client: ClientDto) {
@@ -30,10 +32,11 @@ export class ClientListComponent implements OnInit {
 
   deleteClient(cl: ClientDto): void {
     if (confirm((`Are you sure you want to delete ${cl.name} Client`))) {
+      const finalClients = this.clients.filter(client => client.id !== cl.id);
+      this.clients = [...finalClients];
+      this.changeDetection.detectChanges();
       this.clientProfileService.deleteClient(cl.id).subscribe();
       this.toaster.success('Client deleted successfully', 'success', {timeOut: 4000});
-      this.router.navigate(['client/create-client']);
-      this.changeDetection.detectChanges();
     }
   }
 }
