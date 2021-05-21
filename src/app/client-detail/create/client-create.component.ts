@@ -12,11 +12,11 @@ import {v4 as uuid} from 'uuid';
 })
 export class ClientCreateComponent implements OnInit {
 
-  client: ClientDto = new ClientDto();
+  public client: ClientDto = new ClientDto();
 
-  preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
+  public preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
 
-  gender: Array<any> = ['Male', 'Female', 'None'];
+  public gender: Array<any> = ['Male', 'Female', 'None'];
 
   constructor(private clientProfileService: ClientProfileService,
               private toaster: ToastrService,
@@ -36,11 +36,6 @@ export class ClientCreateComponent implements OnInit {
           this.router.navigate(['/client/client-list']);
         },
         error => {
-          console.log('errr', error);
-          error.message.forEach(er => {
-            console.log('eee', er);
-          })
-
           this.toaster.error('Something went wrong', 'Error Occur', {timeOut: 4000});
         }
       );
