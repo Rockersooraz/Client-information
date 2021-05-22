@@ -41,6 +41,8 @@ export class ClientListComponent implements OnInit {
     if (confirm((`Are you sure you want to delete ${cl.name} Client`))) {
       const finalClients = this.clients.filter(client => client.id !== cl.id);
       this.clients = [...finalClients];
+      this.pageSize = finalClients.length;
+      this.length = this.length - 1;
       this.changeDetection.detectChanges();
       this.clientProfileService.deleteClient(cl.id).subscribe();
       this.toaster.success('Client deleted successfully', 'success', {timeOut: 4000});
