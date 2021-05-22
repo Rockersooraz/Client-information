@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ClientProfileService} from '../client-profile.service';
 import {ClientDto} from '../dto/client.dto';
 import {ToastrService} from 'ngx-toastr';
-import {Observable} from 'rxjs';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-account-list',
@@ -14,6 +14,11 @@ export class ClientListComponent implements OnInit {
 
   public clients: ClientDto[];
 
+  public length;
+  public pageSize;
+  public pageSizeOptions: number[] = [5, 10, 25, 100];
+  public pageEvent: PageEvent;
+
   constructor(private clientProfileService: ClientProfileService,
               private router: Router,
               private toaster: ToastrService,
@@ -21,8 +26,10 @@ export class ClientListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clientProfileService.getAllClients().subscribe((client) => {
-      this.clients = client;
+    this.clientProfileService.getAllClients().subscribe((clientInfo) => {
+      this.clients = clientInfo.client;
+      this.pageSize = +clientInfo.limit;
+      this.length = +clientInfo.totalRecords;
     });
   }
 

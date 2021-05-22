@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {ClientDto} from './dto/client.dto';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {PageableDto} from './dto/pageable.dto';
 
 @Injectable({providedIn: 'root'})
 export class ClientProfileService {
@@ -17,8 +18,8 @@ export class ClientProfileService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getAllClients(): Observable<ClientDto[]> {
-    return this.http.get<ClientDto[]>(this.apiUrl)
+  getAllClients(): Observable<PageableDto> {
+    return this.http.get<PageableDto>(this.apiUrl)
       .pipe(catchError(this.erroHandler));
   }
 

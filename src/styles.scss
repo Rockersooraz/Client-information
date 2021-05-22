@@ -69,7 +69,6 @@ button {
 
 #profile-image1 {
   cursor: pointer;
-
   width: 100px;
   height: 100px;
   border: 2px solid #03b1ce;
@@ -84,3 +83,6 @@ button {
   border-bottom: 1px #f8f8f8 solid;
   margin: 5px 0 5px 0
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

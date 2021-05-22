@@ -6,6 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ClientDetailComponent} from './detail/client-detail.component';
 import {ClientListComponent} from './list/client-list.component';
 import {HttpClientModule} from '@angular/common/http';
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 const routes: Routes = [
   { path: 'create-client', component: ClientCreateComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ]
 })
 export class ClientDetailModule { }
