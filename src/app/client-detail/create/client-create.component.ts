@@ -23,12 +23,13 @@ export class ClientCreateComponent implements OnInit {
 
   public preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
 
-  constructor(private clientProfileService: ClientProfileService,
-              private toaster: ToastrService,
-              private dataService: DataService,
-              private route: ActivatedRoute,
-              private router: Router) {
-  }
+  constructor(
+              private readonly toaster: ToastrService,
+              private readonly dataService: DataService,
+              private readonly route: ActivatedRoute,
+              private readonly clientProfileService: ClientProfileService,
+              private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dataService.currentClient.subscribe(data => {
