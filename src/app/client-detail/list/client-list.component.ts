@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {ClientProfileService} from '../client-profile.service';
-import {ClientDto} from '../dto/client.dto';
+import {ClientDto, initialClient} from '../dto/client.dto';
 import {ToastrService} from 'ngx-toastr';
 import {PageEvent} from '@angular/material/paginator';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-account-list',
@@ -13,13 +14,13 @@ import {PageEvent} from '@angular/material/paginator';
 export class ClientListComponent implements OnInit {
 
   public clients: ClientDto[];
-
   public length;
   public pageSize;
   public pageSizeOptions: number[] = [5, 10, 25, 100];
   public pageEvent: PageEvent;
 
   constructor(private clientProfileService: ClientProfileService,
+              private dataService: DataService,
               private router: Router,
               private toaster: ToastrService,
               private changeDetection: ChangeDetectorRef) {
@@ -47,5 +48,14 @@ export class ClientListComponent implements OnInit {
       this.clientProfileService.deleteClient(cl.id).subscribe();
       this.toaster.success('Client deleted successfully', 'success', {timeOut: 4000});
     }
+  }
+
+  updateClient(cl: ClientDto) {
+    this.dataService.changeClient(cl);
+    this.router.navigate(['client/create-client']);
+  }
+
+  resetForm() {
+    this.dataService.changeClient(initialClient);
   }
 }

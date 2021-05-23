@@ -94,7 +94,7 @@
     </div>
 
     <div class="form-group" [class.text-danger]="modeOfContactControl.invalid && modeOfContactControl.touched">
-      <label for="modeOfContact">Currency Code: </label>
+      <label for="modeOfContact">Preferred Mode Of Contact: </label>
       <select class="set-content" name="modeOfContact" id="modeOfContact" [(ngModel)]="client.preferredModeOfContact"
               required #modeOfContactControl="ngModel">
         <option value="" disabled>Choose Preferred Mode of Contact</option>
@@ -108,7 +108,7 @@
     </div>
     <div class="form-group"><label>&nbsp;</label>
       <button type="submit" [ngClass]="!postForm.form.valid ? 'display-faded': ''" [disabled]="!postForm.form.valid">
-        Create Client
+             {{ viewMode === ViewMode.CREATE ? 'Create Client' : 'Update Client'}}
       </button>
     </div>
   </form>

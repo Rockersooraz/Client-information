@@ -1,6 +1,6 @@
 <br>
 <div class="d-flex justify-content-end" style="margin-right: 40px;">
-  <a id="account" class="btn btn-info" routerLink="/client/create-client">Create Account</a>
+  <a id="account" class="btn btn-info" (click)="resetForm()" routerLink="/client/create-client">Create Account</a>
 </div>
 <br>
 <br>
@@ -38,6 +38,7 @@
     <td>{{cl.educationBackground}}</td>
     <td>{{cl.preferredModeOfContact}}</td>
     <td (click)="onSelect(cl)" class="btn btn-info" style="cursor: pointer;"><i class="fa fa-eye mr-4 display-blue align-margin"></i>Details</td>
+    <td (click)="updateClient(cl)" class="btn btn-info" style="cursor: pointer;"><i class="fa fa-eye mr-4 display-blue align-margin"></i>Update</td>
     <td (click)="deleteClient(cl)" class="btn btn-danger" style="cursor: pointer; color: #030005"><i class="fa fa-trash display-blue align-margin"></i>Delete</td>
   </tr>
   </tbody>

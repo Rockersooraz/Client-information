@@ -1,9 +1,12 @@
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {ClientDto} from '../dto/client.dto';
 import {ClientProfileService} from '../client-profile.service';
 import {v4 as uuid} from 'uuid';
+import {DataService} from '../data.service';
+import {ViewMode} from '../dto/view-mode';
+
 
 @Component({
   selector: 'app-account-create',
@@ -14,31 +17,66 @@ export class ClientCreateComponent implements OnInit {
 
   public client: ClientDto = new ClientDto();
 
-  public preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
+  public viewMode: ViewMode = ViewMode.CREATE;
 
   public gender: Array<any> = ['Male', 'Female', 'None'];
 
+  public preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
+
   constructor(private clientProfileService: ClientProfileService,
               private toaster: ToastrService,
+              private dataService: DataService,
+              private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit(): void {
+    this.dataService.currentClient.subscribe(data => {
+      if (data.name && data.email) {
+        this.viewMode = ViewMode.EDITING;
+        this.client = data;
+      }
+    });
   }
 
-  onSubmit() {
-    const id = uuid();
-    this.clientProfileService.createClient({id, ...this.client})
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.toaster.success('Client created successfully');
-          this.router.navigate(['/client/client-list']);
-        },
-        error => {
-          this.toaster.error('Something went wrong', 'Error Occur', {timeOut: 4000});
-        }
-      );
+  get ViewMode() {
+    return ViewMode;
+  }
+
+  onSubmit(): void {
+    switch (this.viewMode) {
+      case ViewMode.CREATE:
+        const id = uuid();
+        this.clientProfileService.createClient({id, ...this.client})
+          .subscribe(
+            () => {
+              this.displaySuccessAndNavigate();
+            },
+            () => {
+              this.showErrorOnFailure();
+            }
+          );
+        break;
+      case ViewMode.EDITING:
+        this.clientProfileService.updateClient(this.client).subscribe(
+          () => {
+            this.displaySuccessAndNavigate();
+          },
+          () => {
+            this.showErrorOnFailure();
+          }
+        );
+    }
+  }
+
+  private displaySuccessAndNavigate() {
+    this.toaster.success('Client created successfully');
+    this.router.navigate(['/client/client-list']);
+  }
+
+  private showErrorOnFailure() {
+    this.toaster.error('Something went wrong', 'Error Occur',
+      {timeOut: 4000});
   }
 
 

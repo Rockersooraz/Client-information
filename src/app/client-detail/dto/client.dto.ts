@@ -10,3 +10,18 @@ export class ClientDto {
    educationBackground: string;
    preferredModeOfContact: string;
 }
+
+export const initialClient = {
+  id: '',
+  name: '',
+  gender: '',
+  phone: 0,
+  email: '',
+  address: '',
+  nationality: '',
+  dateOfBirth: '',
+  educationBackground: '',
+  preferredModeOfContact: '',
+};
+
+

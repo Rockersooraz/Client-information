@@ -34,7 +34,7 @@ export class ClientProfileService {
   }
 
   updateClient(clientInfo: ClientDto): Observable<ClientDto> {
-    return this.http.put<ClientDto>(this.apiUrl, clientInfo, this.httpOptions)
+    return this.http.put<ClientDto>(`${this.apiUrl}${clientInfo.id}`, clientInfo, this.httpOptions)
       .pipe(catchError(this.erroHandler));
   }
 
