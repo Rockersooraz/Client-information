@@ -1,27 +1,42 @@
-# ClientInformation
+## Introduction
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+This is an SPA written in Typescript Angular framework.This app comprises the user interface for performing the CRUD operation of the clients with proper validation.
+It comprises static login page.Just click on login button, and you will be redirected to the client-creation page.
 
-## Development server
+## Features(Components)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Login 
+2. Client-Creation with validation
+3. Listing of client with pagination
+4. Detail View of Clients
+5. Deletion of clients
 
-## Code scaffolding
+## Use of Library and Purpose of use
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. bootstrap - To provide the quick styling
+2. font-awesome  - To present with required icons
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Code Quality Checking
 
-## Running unit tests
+This Github repository has been scanned through codeclimate and following result was obtained.
+![Optional Text](./src/assets/codeclimate-ui-report.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+```bash
+$ npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Running the app
 
-## Further help
+```bash
+# development
+$ npm run start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Stay in touch
+
+- Author - [Suraj Adhikari]()
+- LinkedIn - [@surajadhikari](https://www.linkedin.com/in/surajadhikari98/)
+
