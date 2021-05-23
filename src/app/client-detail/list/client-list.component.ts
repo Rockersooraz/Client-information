@@ -21,9 +21,9 @@ export class ClientListComponent implements OnInit {
 
   constructor(private clientProfileService: ClientProfileService,
               private dataService: DataService,
-              private router: Router,
-              private toaster: ToastrService,
-              private changeDetection: ChangeDetectorRef) {
+              private readonly router: Router,
+              private readonly toaster: ToastrService,
+              private readonly changeDetection: ChangeDetectorRef) {
   }
 
   ngOnInit() {
