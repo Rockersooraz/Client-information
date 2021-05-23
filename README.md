@@ -36,6 +36,9 @@ $ npm install
 $ npm run start
 ```
 
+Make sure to run your backend at port 3000 or you can change the url in client-profile.service.ts file.
+Also you can setup your own proxy.
+
 ## Stay in touch
 
 - Author - [Suraj Adhikari]()
