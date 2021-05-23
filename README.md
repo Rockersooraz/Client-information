@@ -10,6 +10,7 @@ It comprises static login page.Just click on login button, and you will be redir
 3. Listing of client with pagination
 4. Detail View of Clients
 5. Deletion of clients
+6. Update information of clients
 
 ## Use of Library and Purpose of use
 
