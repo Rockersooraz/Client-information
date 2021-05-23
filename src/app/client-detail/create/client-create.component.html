@@ -44,7 +44,7 @@
 
     <div class="form-group" [class.text-danger]="emailControl.invalid && emailControl.touched">
       <label>Email: </label>
-      <input type="email" minlength="5" maxlength="40" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" name="email"
+      <input class="set-content" type="email" minlength="5" maxlength="40" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" name="email"
              id="email" [(ngModel)]="client.email"
              required #emailControl="ngModel">
       <span *ngIf="emailControl.invalid && emailControl.touched">
