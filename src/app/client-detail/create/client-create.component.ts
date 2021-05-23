@@ -19,20 +19,19 @@ export class ClientCreateComponent implements OnInit {
 
   public viewMode: ViewMode = ViewMode.CREATE;
 
-  public gender: Array<any> = ['Male', 'Female', 'None'];
+  public gender: Array<string> = ['Male', 'Female', 'None'];
 
-  public preferredModeOfContact: Array<any> = ['Email', 'Phone', 'None'];
+  public preferredModeOfContact: Array<string> = ['Email', 'Phone', 'None'];
 
   constructor(
               private readonly toaster: ToastrService,
-              private readonly dataService: DataService,
-              private readonly route: ActivatedRoute,
+              private readonly dataCommunicationService: DataService,
               private readonly clientProfileService: ClientProfileService,
-              private readonly router: Router
+              private readonly routes: Router
   ) {}
 
   ngOnInit(): void {
-    this.dataService.currentClient.subscribe(data => {
+    this.dataCommunicationService.currentClient.subscribe(data => {
       if (data.name && data.email) {
         this.viewMode = ViewMode.EDITING;
         this.client = data;
@@ -72,7 +71,7 @@ export class ClientCreateComponent implements OnInit {
 
   private displaySuccessAndNavigate() {
     this.toaster.success('Client created successfully');
-    this.router.navigate(['/client/client-list']);
+    this.routes.navigate(['/client/client-list']);
   }
 
   private showErrorOnFailure() {

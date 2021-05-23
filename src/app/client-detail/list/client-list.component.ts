@@ -19,15 +19,15 @@ export class ClientListComponent implements OnInit {
   public pageSizeOptions: number[] = [5, 10, 25, 100];
   public pageEvent: PageEvent;
 
-  constructor(private clientProfileService: ClientProfileService,
-              private dataService: DataService,
+  constructor(private readonly profileService: ClientProfileService,
+              private readonly dataService: DataService,
               private readonly router: Router,
               private readonly toaster: ToastrService,
               private readonly changeDetection: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.clientProfileService.getAllClients().subscribe((clientInfo) => {
+    this.profileService.getAllClients().subscribe((clientInfo) => {
       this.clients = clientInfo.client;
       this.pageSize = +clientInfo.limit;
       this.length = +clientInfo.totalRecords;
@@ -45,7 +45,7 @@ export class ClientListComponent implements OnInit {
       this.pageSize = finalClients.length;
       this.length = this.length - 1;
       this.changeDetection.detectChanges();
-      this.clientProfileService.deleteClient(cl.id).subscribe();
+      this.profileService.deleteClient(cl.id).subscribe();
       this.toaster.success('Client deleted successfully', 'success', {timeOut: 4000});
     }
   }
